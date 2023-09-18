@@ -1,6 +1,4 @@
-import { useState, useEffect } from "react";
-import apiClient from "../services/api-client";
-import axios from "axios";
+import useData from "./useData";
 
 export interface Platform {
   id: number;
@@ -16,46 +14,6 @@ export interface Game {
   metacritic: number;
 }
 
-interface FetchGamesResponse {
-  count: number;
-  results: Game[];
-}
-
-const useGames = () => {
-  const [games, setGames] = useState<Game[]>([]);
-  const [error, setError] = useState("");
-  const [isLoading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const controller = new AbortController();
-
-    const CancelToken = axios.CancelToken;
-    const source = CancelToken.source();
-
-    setLoading(true);
-    apiClient
-      .get<FetchGamesResponse>("/games", {
-        cancelToken: source.token,
-        signal: controller.signal,
-      })
-      .then((response) => {
-        setGames(response.data.results);
-        setLoading(false);
-      })
-      .catch((error) => {
-        if (axios.isCancel(error)) {
-          return;
-        }
-        setError(error.message);
-        setLoading(false);
-      });
-
-    return () => {
-      controller.abort();
-    };
-  }, []);
-
-  return { games, error, isLoading };
-};
+const useGames = () => useData<Game>("/games");
 
 export default useGames;
