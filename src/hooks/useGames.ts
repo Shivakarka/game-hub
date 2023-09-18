@@ -24,6 +24,7 @@ interface FetchGamesResponse {
 const useGames = () => {
   const [games, setGames] = useState<Game[]>([]);
   const [error, setError] = useState("");
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -31,6 +32,7 @@ const useGames = () => {
     const CancelToken = axios.CancelToken;
     const source = CancelToken.source();
 
+    setLoading(true);
     apiClient
       .get<FetchGamesResponse>("/games", {
         cancelToken: source.token,
@@ -38,12 +40,14 @@ const useGames = () => {
       })
       .then((response) => {
         setGames(response.data.results);
+        setLoading(false);
       })
       .catch((error) => {
         if (axios.isCancel(error)) {
           return;
         }
         setError(error.message);
+        setLoading(false);
       });
 
     return () => {
@@ -51,7 +55,7 @@ const useGames = () => {
     };
   }, []);
 
-  return { games, error };
+  return { games, error, isLoading };
 };
 
 export default useGames;
