@@ -14,7 +14,7 @@ export const GameGrid = ({ gameQuery }: GameGridProps) => {
   const Skeletons = Array.from(Array(9).keys());
 
   if (error) {
-    return <Text>{error}</Text>;
+    return <Text>{error.message}</Text>;
   }
 
   return (
@@ -29,7 +29,7 @@ export const GameGrid = ({ gameQuery }: GameGridProps) => {
             <GameCardSkeleton />
           </GameCardContainer>
         ))}
-      {data.map((game) => (
+      {data?.results.map((game) => (
         <GameCardContainer key={game.id}>
           <GameCard game={game} />
         </GameCardContainer>
