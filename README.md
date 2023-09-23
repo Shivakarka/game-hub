@@ -40,3 +40,9 @@ Live Link : [Click Here](https://game-hub-sk.vercel.app/)
 npm install
 npm run dev
 ```
+## Screenshots
+![chrome-capture-2023-8-24](https://github.com/Shivakarka/game-hub/assets/64298475/b9e4364b-2e86-4e65-a07b-046af71a4b1d)
+![chrome-capture-2023-8-24 (1)](https://github.com/Shivakarka/game-hub/assets/64298475/da62bf56-42aa-44e3-842f-d94736c9261b)
+![chrome-capture-2023-8-24 (2)](https://github.com/Shivakarka/game-hub/assets/64298475/a4cc8b90-b9c8-475f-aa45-8dfe707c2492)
+
+
